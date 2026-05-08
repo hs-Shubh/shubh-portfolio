@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0b0f1a;
+  --fg: #e6e9f0;
+  --muted: #9aa3b2;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  position: relative;
+}
+
+/* Gradient animations */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(86, 104, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(86, 104, 255, 0.6);
+  }
+}
+
+.container {
+  @apply max-w-6xl mx-auto px-6;
+}
+
+.section {
+  @apply py-16 md:py-24;
+  position: relative;
+}
+
+.card {
+  @apply rounded-xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl transition-all duration-300 ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(86, 104, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.card:hover::before {
+  left: 100%;
+}
+
+.card:hover {
+  @apply scale-[1.02] border-white/20 shadow-2xl;
+  box-shadow: 0 20px 40px rgba(86, 104, 255, 0.2);
+}
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-all;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-primary {
+  @apply bg-brand-600 hover:bg-brand-700 text-white shadow-lg;
+  background: linear-gradient(135deg, #5668ff 0%, #3946e6 100%);
+  box-shadow: 0 4px 15px rgba(86, 104, 255, 0.4);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #3946e6 0%, #2d37b3 100%);
+  box-shadow: 0 6px 20px rgba(86, 104, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  @apply border border-white/20 hover:border-white/40 bg-transparent text-white;
+  position: relative;
+}
+
+.btn-outline:hover {
+  @apply bg-white/5;
+  border-color: rgba(86, 104, 255, 0.5);
+  box-shadow: 0 0 20px rgba(86, 104, 255, 0.3);
+}
+
+.badge {
+  @apply inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80;
+  transition: all 0.3s ease;
+}
+
+.badge:hover {
+  @apply border-brand-500/50 bg-brand-500/10;
+  transform: translateY(-2px);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0f1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(86, 104, 255, 0.5);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(86, 104, 255, 0.7);
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(86, 104, 255, 0.3);
+  color: #fff;
+}
+
+/* 3D / hero utilities */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.skills-marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+@keyframes skills-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.skills-marquee-track {
+  animation: skills-marquee 42s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills-marquee-track {
+    animation: none;
+  }
+
+  .hero-parallax {
+    transform: none !important;
+  }
+}
