@@ -5,16 +5,17 @@ import { motion } from 'framer-motion'
 
 type ProjectButton = { label: string; href: string }
 
-type CardProps = {
+type ProjectItem = {
   title: string
   type: string
   description: string[]
   tech: string[]
   buttons: ProjectButton[]
-  index: number
   imageSrc?: string
   imageAlt?: string
 }
+
+type CardProps = ProjectItem & { index: number }
 
 function Card({
   title,
@@ -105,7 +106,7 @@ function Card({
 }
 
 export default function Projects() {
-  const projects: CardProps[] = [
+  const projects: ProjectItem[] = [
     {
       title: 'Hagerstone Lead Scraper (Google Places + Supabase)',
       type: 'Open repo · Data & APIs',
